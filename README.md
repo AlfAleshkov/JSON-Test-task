@@ -71,13 +71,19 @@ end;
 и вывести в результате количество вставленных строк или ошибку»<br />
 <br />
 ```Pascal
+var 
+ RowsAffected:byte;
+...
 try
+  RowsAffected:=0;
   FDQuery.SQL.Clear;
-  FDQuery.SQL.Add('INSERT INTO testTable (art, title, price) VALUES (''16605.3'',''Щенячий патруль база спасателей'', ''1499р'');');
-  FDQuery.SQL.Add('INSERT INTO testTable (art, title, price) VALUES (''16605.4'',''Щенячий патруль спасатель'', ''1599р'');');
-  FDQuery.SQL.Add('INSERT INTO testTable (art, title, price) VALUES (''16608'',''Щенячий патруль гонщик'', ''999р'');');
-  FDQuery.ExecSQL;
-  Memo.Lines.Add('Lines affected:'+IntToStr(FDQuery.RowsAffected));
+  FDQuery.ExecSQL('INSERT INTO testTable (art, title, price) VALUES (''16605.3'',''Щенячий патруль база спасателей'', ''1499р'')');
+  RowsAffected:=RowsAffected+FDQuery.RowsAffected;
+  FDQuery.ExecSQL('INSERT INTO testTable (art, title, price) VALUES (''16605.4'',''Щенячий патруль спасатель'', ''1599р'')');
+  RowsAffected:=RowsAffected+FDQuery.RowsAffected;
+  FDQuery.ExecSQL('INSERT INTO testTable (art, title, price) VALUES (''16608'',''Щенячий патруль гонщик'', ''999р'')');
+  RowsAffected:=RowsAffected+FDQuery.RowsAffected;
+  Memo.Lines.Add('Lines affected:'+IntToStr(RowsAffected));
 except
   on E: EFDDBEngineException do
     Memo.Lines.Add('Error:'+e.Message);
