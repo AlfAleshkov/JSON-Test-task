@@ -89,3 +89,7 @@ except
     Memo.Lines.Add('Error:'+e.Message);
 end;
 ```
+Или можно было через Bulk insert, но вот например FireBird его, увы, не поддерживает, а так был бы всего один INSERT
+```
+FDQuery.ExecSQL('INSERT INTO testTable (art, title, price) VALUES ( ... , ... , ... ),  ( ... , ... , ... ),  ( ... , ... , ... )');
+```
