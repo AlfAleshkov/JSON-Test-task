@@ -70,7 +70,7 @@ end;
 <br />
 и вывести в результате количество вставленных строк или ошибку»<br />
 <br />
-```
+```Pascal
 try
   FDQuery.SQL.Clear;
   FDQuery.SQL.Add('INSERT INTO testTable (art, title, price) VALUES (''16605.3'',''Щенячий патруль база спасателей'', ''1499р'');');
