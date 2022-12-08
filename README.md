@@ -61,6 +61,20 @@ begin
 end;
 ```
 можно обернуть в отдельный класс, но всё равно считаю этот вариант менее предпочтительным, потому что придется также написать ряд функций, которые будут проверять уникальность ключа, поиск по ключу, хорошо бы добавить внутренюю сортировку для повышения эффективности поиска по ключу, в общем по новой изобретать велосипед, который уже реализован в ```TDictionary```<br />
+```
+try
+  FDQuery.SQL.Clear;
+  FDQuery.SQL.Add('INSERT INTO testTable (art, title, price) VALUES (''16605.3'',''Щенячий патруль база спасателей'', ''1499р'');');
+  FDQuery.SQL.Add('INSERT INTO testTable (art, title, price) VALUES (''16605.4'',''Щенячий патруль спасатель'', ''1599р'');');
+  FDQuery.SQL.Add('INSERT INTO testTable (art, title, price) VALUES (''16608'',''Щенячий патруль гонщик'', ''999р'');');
+  FDQuery.ExecSQL;
+  Memo.Lines.Add('Lines affected:'+IntToStr(FDQuery.RowsAffected));
+except
+  on E: EFDDBEngineException do
+    Memo.Lines.Add('Error:'+e.Message);
+end;
+```
+
 <br />
 Третий вопрос:<br />
 «3. На форме уже есть FDConnection, FDQuery, он настроены. Вам надо с помощью FDQuery вставить в таблицу testTable (art, title, price) значения:<br />
